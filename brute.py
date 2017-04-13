@@ -1,8 +1,17 @@
+import sys
+
+# Read in file names
+fileName1 = sys.argv[1]
+fileName2 = sys.argv[2]
+# Files
+source1 = open(sys.argv[1], "r").read()
+source2 = open(sys.argv[2], "r").read()
+
 def printMatrix(mat,rowName,columnName):
     i = 0
     val = " |   | "
     for c in xrange(len(mat[0])-1):
-        if columnName[c] != '\0':
+        if columnName[c] != '\0' and columnName[c] != '\1':
             val += columnName[c]+" | "
         else:
             val += "  |"
@@ -11,7 +20,7 @@ def printMatrix(mat,rowName,columnName):
     for row in mat:
         if i == 0:
             val = " | "
-        elif rowName[i-1] == '\0':
+        elif rowName[i-1] == '\0' or rowName[i-1] == '\1':
             val = " | "
         elif i  <= len(rowName):
             val = str(rowName[i-1]) + "| "
@@ -25,7 +34,7 @@ def printMatrix(mat,rowName,columnName):
 def getLongestSubString(val1 ,val2):
     #add terminating character
     val1 += '\0'
-    val2 += '\0'
+    val2 += '\1'
     #Length of both arrays
     lenN = len(val1)
     lenM = len(val2)
@@ -34,7 +43,7 @@ def getLongestSubString(val1 ,val2):
         [0 for x in xrange(lenM+1)]
         for x in xrange(lenN+1)
     ]
-
+ #   printMatrix(matrix,val1,val2)
     # Set longest common substring pos relative to val1 
     longestPos,longestLen = 0,0
     #O(N*M)
@@ -47,15 +56,14 @@ def getLongestSubString(val1 ,val2):
                     longestPos = x
             else:
                 matrix[x][y] = 0
-
-    return val1[longestPos-longestLen:longestLen]
-
-import sys
-# Read in file names
-fileName1 = sys.argv[1]
-fileName2 = sys.argv[2]
-# Files
-source1 = open(sys.argv[1], "r").read()
-source2 = open(sys.argv[2], "r").read()
+ #   printMatrix(matrix,val1,val2)
+ #   print "L: " + str(longestLen) + " - P: " + str(longestPos)
+    if longestPos-longestLen >= 1 :
+        return val1[longestPos-longestLen]
+    elif longestLen == 0 and longestPos == 0:
+        return "NONE"
+    else:
+        return val1[longestPos-longestLen:longestLen]
 
 print getLongestSubString(source1,source2)
+#print "-" + source1 + ", " + source2 
