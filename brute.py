@@ -1,4 +1,4 @@
-import sys
+import sys, time
 
 # Read in file names
 fileName1 = sys.argv[1]
@@ -6,6 +6,15 @@ fileName2 = sys.argv[2]
 # Files
 source1 = open(sys.argv[1], "r").read()
 source2 = open(sys.argv[2], "r").read()
+
+def measureTime(functionToMeasure,pair):
+	start = time.time()
+	res = functionToMeasure(pair[0],pair[1])
+	timeV = str(time.time() - start)
+	if(res is None):
+		return timeV+",None" 
+	else:
+		return timeV+","+str(res)
 
 def printMatrix(mat,rowName,columnName):
     i = 0
@@ -65,5 +74,9 @@ def getLongestSubString(val1 ,val2):
     else:
         return val1[longestPos-longestLen:longestLen]
 
-print getLongestSubString(source1,source2)
-#print "-" + source1 + ", " + source2 
+res = measureTime(getLongestSubString, [source1, source2]) + ","
+res += source1 + "," + source2 + ',' 
+res += str(len(source1)) + "," + str(len(source2)) + ","
+res += str(len(source1) * len(source2))
+print res
+#print "," + source1 + ", " + source2 
