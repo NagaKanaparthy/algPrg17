@@ -67,9 +67,10 @@ def getLongestSubString(val1 ,val2):
                 matrix[x][y] = 0
  #   printMatrix(matrix,val1,val2)
  #   print "L: " + str(longestLen) + " - P: " + str(longestPos)
-    if longestPos-longestLen == longestLen :
-        return val1[longestPos-longestLen]
-    elif longestLen == 0 and longestPos == 0:
+ #   if longestPos-longestLen == longestLen :
+ #       return val1[longestPos-longestLen]
+ #   el
+    if longestLen == 0 and longestPos == 0:
         return "NONE"
     else:
         return val1[longestPos-longestLen:longestPos]
