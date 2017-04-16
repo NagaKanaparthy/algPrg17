@@ -32,12 +32,10 @@ def runSingleTest(length):
 #grab length
 maxLen = sys.argv[1]
 #Execute Tests
-res = ''
+res = 'time,match,val1,val2,len1,len2,len1xlen2\n'
 for len in range(int(maxLen)+1):
     if(len > 0):
         res += runSingleTest(len).strip() + '\n'
 print res
 #Output Result to file
-resultFile = open('result.csv','w')
-resultFile.write('time,match,val1,val2,len1,len2,len1xlen2\n')
-resultFile.write(res.strip())
+open('result.csv','w').write(res.strip())
